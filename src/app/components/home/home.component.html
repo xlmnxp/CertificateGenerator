@@ -1,5 +1,6 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+<div class="element clearfix">
+  <div #dropplace class="dropplace"></div>
+  <button #generatebutton class="generatebutton" (click)="generateKey()">{{ 'PAGES.HOME.GENERATEKEY' | translate }}</button>
+  <button #resetbutton class="resetbutton" (click)="reset()">&nbsp; &nbsp; &nbsp; &nbsp; {{ 'PAGES.HOME.RESET' | translate }}&nbsp; </button>
+  <progress #progress value="100" max="100" disabled></progress>
 </div>

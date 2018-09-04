@@ -1,0 +1,211 @@
+body {
+  background-color: rgb(230, 230, 230);
+  font: 700 1em/2.5 Helvetica;
+  color: rgb(255, 255, 255);
+}
+
+.dropplace:not([disabled]) {
+  width: 250px;
+  height: 250px;
+  margin: 20px auto 0;
+  border: 3px solid rgba(255, 255, 255, 0.09);
+  border-radius: 15px;
+  background: url('../images/dragPlace.png') rgb(102, 102, 102);
+  background-repeat: no-repeat;
+  background-size: auto auto;
+  background-position: center center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.dropplace[disabled] {
+  width: 250px;
+  height: 250px;
+  margin: 20px auto 0;
+  border: 0;
+  border-radius: 15px;
+  background: url('../images/dragPlace.png') rgb(170, 170, 170);
+  background-repeat: no-repeat;
+  background-size: auto auto;
+  background-position: center center;
+  box-shadow: 0;
+  cursor: default;
+}
+
+.dropplace:not([disabled]):hover {
+  background-color: rgb(94, 94, 94);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dropplace:not([disabled]):active {
+  background-color: rgb(67, 67, 67);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dropplace:focus {
+  background-color: rgba(94, 94, 94, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.element {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  width: 288px;
+  height: 342px;
+  margin: auto;
+  border-radius: 15px;
+  background-color: rgb(222, 222, 222);
+}
+
+.generatebutton[disabled]{
+  display: block;
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 1;
+  height: 40px;
+  margin: 15px 0 0 6.591796875%;
+  padding-right: 13px;
+  padding-left: 13px;
+  border-radius: 3px;
+  background: rgb(150, 150, 150);
+  background: -webkit-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background:    -moz-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background:      -o-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background:     -ms-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background:         linear-gradient(180deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  box-shadow: 0;
+  font-size: 1em;
+  text-align: center;
+  color: #fff;
+  -webkit-transition: 0.05s all;
+  -moz-transition: 0.05s all;
+  -o-transition: 0.05s all;
+  -ms-transition: 0.05s all;
+  transition: 0.05s all;  
+}
+
+.resetbutton[disabled]{
+  display: block;
+  position: relative;
+  float: right;
+  z-index: 2;
+  height: 40px;
+  margin: 15px 6.6135% 0 0;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 3px;
+  background: rgb(150, 150, 150);
+  background: url('../images/refresh.png'), -webkit-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),    -moz-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),      -o-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),     -ms-linear-gradient(270deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),         linear-gradient(180deg, rgb(150, 150, 150) 0%, rgb(100, 100, 100) 100%) rgb(222, 222, 222);
+  background-repeat: no-repeat, repeat;
+  background-size: 36px auto, 100% 100%;
+  background-position: left center, 0% 0%;
+  background-attachment: scroll, scroll;
+  box-shadow: 0;
+  font-size: 1em;
+  text-align: center;
+  color: #fff;
+  -webkit-transition: 0.05s all;
+  -moz-transition: 0.05s all;
+  -o-transition: 0.05s all;
+  -ms-transition: 0.05s all;
+  transition: 0.05s all;  
+}
+
+.generatebutton:not([disabled]) {
+  display: block;
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 1;
+  height: 40px;
+  margin: 15px 0 0 6.591796875%;
+  padding-right: 13px;
+  padding-left: 13px;
+  border-radius: 3px;
+  background: rgb(0, 117, 255);
+  background: -webkit-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background:    -moz-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background:      -o-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background:     -ms-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background:         linear-gradient(180deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.generatebutton:not([disabled]):hover {
+  background-image: -webkit-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image:    -moz-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image:      -o-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image:     -ms-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image:         linear-gradient(180deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .5);
+}
+
+.generatebutton:not([disabled]):active {
+  background-image: -webkit-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image:    -moz-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image:      -o-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image:     -ms-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image:         linear-gradient(180deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+
+.resetbutton:not([disabled]) {
+  display: block;
+  position: relative;
+  float: right;
+  z-index: 2;
+  height: 40px;
+  margin: 15px 6.6135% 0 0;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 3px;
+  background: rgb(0, 117, 255);
+  background: url('../images/refresh.png'), -webkit-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),    -moz-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),      -o-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),     -ms-linear-gradient(270deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background: url('../images/refresh.png'),         linear-gradient(180deg, rgb(0, 117, 255) 0%, rgb(0, 25, 255) 100%) rgb(222, 222, 222);
+  background-repeat: no-repeat, repeat;
+  background-size: 36px auto, 100% 100%;
+  background-position: left center, 0% 0%;
+  background-attachment: scroll, scroll;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  -webkit-transition: 0.05s all;
+  -moz-transition: 0.05s all;
+  -o-transition: 0.05s all;
+  -ms-transition: 0.05s all;
+  transition: 0.05s all;
+}
+
+.resetbutton:not([disabled]):hover {
+  background-image: url('../images/refresh.png'), -webkit-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image: url('../images/refresh.png'),    -moz-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image: url('../images/refresh.png'),      -o-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image: url('../images/refresh.png'),     -ms-linear-gradient(270deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  background-image: url('../images/refresh.png'),         linear-gradient(180deg, rgb(0, 163, 255) 0%, rgb(0, 71, 255) 100%);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .5);
+}
+
+.resetbutton:not([disabled]):active {
+  background-image: url('../images/refresh.png'), -webkit-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image: url('../images/refresh.png'),    -moz-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image: url('../images/refresh.png'),      -o-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image: url('../images/refresh.png'),     -ms-linear-gradient(270deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  background-image: url('../images/refresh.png'),         linear-gradient(180deg, rgb(0, 163, 255) 0.4761904761904762%, rgb(0, 117, 255) 100%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}

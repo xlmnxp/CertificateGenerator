@@ -1,7 +1,8 @@
 {
   "PAGES": {
       "HOME": {
-          "TITLE": "App works !"
+          "GENERATEKEY": "Generate Key",
+          "RESET": "Reset"
       }
   }
 }

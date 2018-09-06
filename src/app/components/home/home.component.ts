@@ -69,6 +69,7 @@ export class HomeComponent implements OnInit {
                   );
                   return;
                 }
+                this.progressBar.nativeElement.value = "3";
                 this.electronService.remote.dialog.showSaveDialog(
                   { defaultPath: "ios_distribution.p12" },
                   (iosDistributionP12: string) => {
@@ -81,18 +82,20 @@ export class HomeComponent implements OnInit {
                       "-in",
                       this.iosDistributionPem,
                       "-out",
-                      this.iosDistributionP12
+                      this.iosDistributionP12,
+                      "-passout",
+                      "pass:123456"
                     ]);
 
-                    spawnPkcs12.stdout.on('data', data => {
-                      this.progressBar.nativeElement.value = "60";
-                      if(data.toString().match(/password/g)){
-                        // TODO: add password prompt 
-                        // this.electronService.remote.dialog.showMessageBox()
-                      }
+                    spawnPkcs12.stdout.on('close', () => {
+                      this.electronService.remote.dialog.showMessageBox({
+                        title: 'عملية ناجحة',
+                        message: 'تم انشاء المفتاح p12 بنجاح \nمسار المفتاح: ' + this.iosDistributionP12,
+                        type: "info"
+                      })
+                      this.progressBar.nativeElement.value = "4";
+                      this.reset();
                     });
-
-                    this.reset();
                   }
                 );
               }
@@ -142,7 +145,7 @@ export class HomeComponent implements OnInit {
           });
 
           spawnGenrsa.stdout.on("close", () => {
-            this.progressBar.nativeElement.value = "20";
+            this.progressBar.nativeElement.value = "1";
             this.electronService.remote.dialog.showSaveDialog(
               { defaultPath: "CertificateSigningRequest.certSigningRequest" },
               (CertificateSigningRequestCertSigningRequestFileName: string) => {
@@ -161,7 +164,7 @@ export class HomeComponent implements OnInit {
                         this.reset();
                         return;
                       }
-                      this.progressBar.nativeElement.value = "40";
+                      this.progressBar.nativeElement.value = "2";
                       this.dropPlace.nativeElement.removeAttribute("disabled");
                     }
                   );
@@ -187,6 +190,6 @@ export class HomeComponent implements OnInit {
     this.resetbutton.nativeElement.setAttribute("disabled", "disabled");
     this.generatebutton.nativeElement.removeAttribute("disabled");
     this.progressBar.nativeElement.setAttribute("disabled", "disabled");
-    this.progressBar.nativeElement.value = "100";
+    this.progressBar.nativeElement.value = "4";
   }
 }

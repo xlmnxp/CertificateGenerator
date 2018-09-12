@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ElectronService } from "../../providers/electron.service";
+const commandExistsSync = require("command-exists").sync;
 
 @Component({
   selector: "app-home",
@@ -24,6 +25,17 @@ export class HomeComponent implements OnInit {
   constructor(public electronService: ElectronService) {}
 
   ngOnInit() {
+    if (!commandExistsSync("openssl")) {
+      this.electronService.remote.dialog.showMessageBox({
+        type: "error",
+        buttons: ["حسنا"],
+        title: "خطا",
+        message: "لم اتمكن من العثور على openssl مثبت على جهازك؟"
+      });
+
+      return;
+    }
+
     this.reset();
 
     this.dropPlace.nativeElement.ondragover = this.dropPlace.nativeElement.ondragleave = this.dropPlace.nativeElement.ondragend = () => {
@@ -59,7 +71,9 @@ export class HomeComponent implements OnInit {
           (iosDistributionPem: string) => {
             this.iosDistributionPem = iosDistributionPem;
             this.electronService.childProcess.exec(
-              `openssl x509 -in ${filename} -inform DER -out ${this.iosDistributionPem} -outform PEM`,
+              `openssl x509 -in ${filename} -inform DER -out ${
+                this.iosDistributionPem
+              } -outform PEM`,
               (error, stderr, stdout) => {
                 if (error) {
                   this.reset();
@@ -74,25 +88,30 @@ export class HomeComponent implements OnInit {
                   { defaultPath: "ios_distribution.p12" },
                   (iosDistributionP12: string) => {
                     this.iosDistributionP12 = iosDistributionP12;
-                    let spawnPkcs12 = this.electronService.childProcess.spawn('openssl',[
-                      "pkcs12",
-                      "-export",
-                      "-inkey",
-                      this.defaultKeyFileName,
-                      "-in",
-                      this.iosDistributionPem,
-                      "-out",
-                      this.iosDistributionP12,
-                      "-passout",
-                      "pass:123456"
-                    ]);
+                    let spawnPkcs12 = this.electronService.childProcess.spawn(
+                      "openssl",
+                      [
+                        "pkcs12",
+                        "-export",
+                        "-inkey",
+                        this.defaultKeyFileName,
+                        "-in",
+                        this.iosDistributionPem,
+                        "-out",
+                        this.iosDistributionP12,
+                        "-passout",
+                        "pass:123456"
+                      ]
+                    );
 
-                    spawnPkcs12.stdout.on('close', () => {
+                    spawnPkcs12.stdout.on("close", () => {
                       this.electronService.remote.dialog.showMessageBox({
-                        title: 'عملية ناجحة',
-                        message: 'تم انشاء المفتاح p12 بنجاح \nمسار المفتاح: ' + this.iosDistributionP12,
+                        title: "عملية ناجحة",
+                        message:
+                          "تم انشاء المفتاح p12 بنجاح \nمسار المفتاح: " +
+                          this.iosDistributionP12,
                         type: "info"
-                      })
+                      });
                       this.progressBar.nativeElement.value = "4";
                       this.reset();
                     });
@@ -150,11 +169,14 @@ export class HomeComponent implements OnInit {
               { defaultPath: "CertificateSigningRequest.certSigningRequest" },
               (CertificateSigningRequestCertSigningRequestFileName: string) => {
                 if (
-                  CertificateSigningRequestCertSigningRequestFileName != undefined
+                  CertificateSigningRequestCertSigningRequestFileName !=
+                  undefined
                 ) {
                   this.CertificateSigningRequestCertSigningRequestFileName = CertificateSigningRequestCertSigningRequestFileName;
                   let spawnReq = this.electronService.childProcess.exec(
-                    `openssl req -new -key ${this.defaultKeyFileName} -out ${this.CertificateSigningRequestCertSigningRequestFileName} -subj "/emailAddress=xlmnxp@outlook.sa, CN=Salem Yaslem, C=SA"`,
+                    `openssl req -new -key ${this.defaultKeyFileName} -out ${
+                      this.CertificateSigningRequestCertSigningRequestFileName
+                    } -subj "/emailAddress=xlmnxp@outlook.sa, CN=Salem Yaslem, C=SA"`,
                     (error, stderr, stdout) => {
                       if (error) {
                         this.electronService.remote.dialog.showErrorBox(
@@ -168,13 +190,13 @@ export class HomeComponent implements OnInit {
                       this.dropPlace.nativeElement.removeAttribute("disabled");
                     }
                   );
-                }else{
+                } else {
                   this.reset();
                 }
               }
             );
           });
-        }else{
+        } else {
           this.reset();
         }
       }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ElectronService } from '../../providers/electron.service';
+const smalltalk = require('smalltalk');
 
 @Component({
   selector: 'app-home',
@@ -87,36 +88,42 @@ export class HomeComponent implements OnInit {
                   { defaultPath: 'ios_distribution.p12' },
                   (iosDistributionP12: string) => {
                     this.iosDistributionP12 = iosDistributionP12;
-                    const password = prompt('ادخل كلمة السر لمفاتيح');
-                    if (password) {
-                      const spawnPkcs12 = this.electronService.childProcess.spawn(
-                        'openssl',
-                        [
-                          'pkcs12',
-                          '-export',
-                          '-inkey',
-                          this.defaultKeyFileName,
-                          '-in',
-                          this.iosDistributionPem,
-                          '-out',
-                          this.iosDistributionP12,
-                          '-passout',
-                          'pass:' + password
-                        ]
-                      );
-
-                      spawnPkcs12.stdout.on('close', () => {
-                        this.electronService.remote.dialog.showMessageBox({
-                          title: 'عملية ناجحة',
-                          message:
-                            'تم انشاء المفتاح p12 بنجاح \nمسار المفتاح: ' +
-                            this.iosDistributionP12,
-                          type: 'info'
-                        });
-                        this.progressBar.nativeElement.value = '4';
-                        this.reset();
-                      });
-                    }
+                    smalltalk.prompt('توليد مفتاح P12', 'كلمة السر للمفتاح', '', {
+                      type: 'password',
+                    })
+                    .then((password) => {
+                        if (password) {
+                          const spawnPkcs12 = this.electronService.childProcess.spawn(
+                            'openssl',
+                            [
+                              'pkcs12',
+                              '-export',
+                              '-inkey',
+                              this.defaultKeyFileName,
+                              '-in',
+                              this.iosDistributionPem,
+                              '-out',
+                              this.iosDistributionP12,
+                              '-passout',
+                              'pass:' + password
+                            ]
+                          );
+                          spawnPkcs12.stdout.on('close', () => {
+                            this.electronService.remote.dialog.showMessageBox({
+                              title: 'عملية ناجحة',
+                              message:
+                                'تم انشاء المفتاح p12 بنجاح \nمسار المفتاح: ' +
+                                this.iosDistributionP12,
+                              type: 'info'
+                            });
+                            this.progressBar.nativeElement.value = '4';
+                            this.reset();
+                          });
+                        }
+                    })
+                    .catch(() => {
+                        console.log('cancel');
+                    });
                   }
                 );
               }
@@ -126,7 +133,7 @@ export class HomeComponent implements OnInit {
       } else {
         this.electronService.remote.dialog.showErrorBox(
           'Error',
-          'drag cer file from apple developer center.'
+          'drag file cer from apple developer center.'
         );
       }
 

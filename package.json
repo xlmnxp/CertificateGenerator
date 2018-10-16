@@ -36,9 +36,7 @@
     "test": "npm run postinstall:web && ng test",
     "e2e": "npm run postinstall:web && ng e2e"
   },
-  "dependencies": {
-    "command-exists": "^1.2.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.3",
     "@angular/cli": "6.1.2",

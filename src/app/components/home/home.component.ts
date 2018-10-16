@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ElectronService } from '../../providers/electron.service';
-const commandExistsSync = require('command-exists').sync;
 
 @Component({
   selector: 'app-home',
@@ -25,7 +24,7 @@ export class HomeComponent implements OnInit {
   constructor(public electronService: ElectronService) {}
 
   ngOnInit() {
-    if (!commandExistsSync('openssl')) {
+    if (!true) {
       this.electronService.remote.dialog.showMessageBox({
         type: 'error',
         buttons: ['حسنا'],

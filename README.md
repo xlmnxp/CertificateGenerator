@@ -7,7 +7,7 @@
 
 # Introduction
 
-CertificateGenerator to generate ios certificate work on Linux, Windows and Mac OS.
+CertificateGenerator is tool to generate ios certificate work on Linux, Windows and Mac OS.
 
 Requires:
 - Openssl
